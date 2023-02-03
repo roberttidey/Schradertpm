@@ -1,7 +1,7 @@
 # Schrader tyre pressure monitor for ESP8266
 This is a work in progress. It is not functional yet.
 
-It is effectivel a port of the excellent Hackster project by JSMSolns
+It is effectively a port of the excellent Hackster project by JSMSolns
 
 https://www.hackster.io/jsmsolns/arduino-tpms-tyre-pressure-display-b6e544
 
@@ -15,7 +15,7 @@ See this article for full details and background
 - OTA for updates
 - File browser for maintenance
 - State machine added to avoid while loops in main loop which would cause watchdog problems on ESP8266
-- useTestTimings is now a dynaic variable rather than a compile option
+- useTestTimings is now a dynamic variable rather than a compile option
 - added getData webURL to get basic data http://ip/getData
 - added setMode webURL to control usetestTimings http://setMode?mode=0 or http://setMode?mode=1
 	
