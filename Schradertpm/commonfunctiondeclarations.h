@@ -1,0 +1,41 @@
+extern void GetPreferredIndexStr(unsigned long ID, char* sptr);
+extern void MatchIDandUpdate(unsigned long id ,unsigned int status, float realtemp,float realpressure);
+extern bool IsValidSync(unsigned int Width);
+extern bool IsValidShort(unsigned int Width);
+extern bool IsValidLong(unsigned int Width);
+extern bool IsEndMarker(unsigned int Width);
+extern bool IsTooShort(unsigned int Width);
+extern bool IsTooLong(unsigned int Width);
+extern int ValidateBit();
+extern int ValidateBit(int Index);
+extern byte Compute_CRC8( int bcount, byte Poly, byte crc_init );
+extern byte Compute_CRC_XOR(int Start, int bcount, byte crc_init);
+extern byte Compute_CRC_SUM(int Start, int bcount, byte crc_init);
+extern int GetRSSI_dbm();
+extern int ManchesterDecode(int StartIndex);
+extern int DifferentialManchesterDecode(int StartIndex);
+extern void InvertBitBuffer();
+extern int DecodeBitArray(int StartIndex, byte ShiftRightBitCount);
+extern int DecodeBitArray( byte ShiftRightBitCount);
+extern int FindManchesterStart(const uint8_t *pattern,int pattern_bits_len );
+extern void PrintTimings(byte StartPoint, unsigned int Count);
+extern void PrintBytes(unsigned int Count);
+extern void PrintData(int StartPos, unsigned int Count);
+extern void InvertBitBuffer();
+extern float DegC_To_DegF(float DegC);
+extern float DegF_To_DegC(float DegF);
+extern float DegC_To_DegK(float DegC);
+extern float DegF_To_DegK(float DegF);
+extern float DegC_To_DegF(float DegC);
+extern float DegF_To_DegC(float DegF);
+extern double PSI_To_BAR(double Pressure_PSI);
+extern double PSI_To_KPA(double Pressure_PSI);
+extern double BAR_To_PSI(double Pressure_BAR);
+extern double KPA_To_PSI(double Pressure_KPA);
+extern double ConvertPressureForDisplay(double Pressure_PSI);
+
+
+
+extern byte ReadFIFO();
+extern byte Get_RX_FIFO_Count();
+void ClearRXBuffer();
