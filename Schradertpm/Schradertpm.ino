@@ -45,14 +45,18 @@
 //          Reported by gamer765 that PMV-107J also works for PMV-C11A sensors.
 
 #define VERSION "10.6"
-#include "BaseConfig.h"
 
-
+#ifdef ESP8266
+	#include "BaseConfig.h"
+#endif
 #include <SPI.h>
-
 #include "configs.h"
 #include "globals.h"
-#include <TickTwo.h>
+#ifdef ESP8266
+	#include <TickTwo.h>
+#else
+	#include <Ticker.h>
+#endif
 
 #include "CommonFunctionDeclarations.h"
 
@@ -104,8 +108,13 @@
 #include "cc1101.h"
 #include "Common.h"
 
-TickTwo displayflashtimer(DisplayTimerExpired,NOBLANK_MS, 0, MILLIS);
-TickTwo SignalRefreshTimer(SignalRefreshRequired, SIGNALREFRESHTIMING, 0, MILLIS);
+#ifdef ESP8266
+	TickTwo displayflashtimer(DisplayTimerExpired,NOBLANK_MS, 0, MILLIS);
+	TickTwo SignalRefreshTimer(SignalRefreshRequired, SIGNALREFRESHTIMING, 0, MILLIS);
+#else
+	Ticker displayflashtimer(DisplayTimerExpired,NOBLANK_MS, 0, MILLIS);
+	Ticker SignalRefreshTimer(SignalRefreshRequired, SIGNALREFRESHTIMING, 0, MILLIS);
+#endif
 
 void UpdateTimers() {
 	#ifdef USE_LCDDISPLAY
@@ -157,37 +166,43 @@ void SendDebug(String Mess) {
 	Serial.println(Mess);
 }
 
-void handleGetData() {
-	String response;
-	int i;
-	
-	for(i = 0; i < TYRECOUNT; i++) {
-		response += String(i) + ",";
-		response += String(TPMS[i].TPMS_ID) + ",";
-		response += String(TPMS[i].TPMS_Pressure) + ",";
-		response += String(TPMS[i].TPMS_Temperature) + "<BR>";
-	}	
-	server.send(200, "text/html", response);
-}
+#ifdef ESP8266
+	void handleGetData() {
+		String response;
+		int i;
+		
+		for(i = 0; i < TYRECOUNT; i++) {
+			response += String(i) + ",";
+			response += String(TPMS[i].TPMS_ID) + ",";
+			response += String(TPMS[i].TPMS_Pressure) + ",";
+			response += String(TPMS[i].TPMS_Temperature) + "<BR>";
+		}	
+		server.send(200, "text/html", response);
+	}
 
-void handleSetMode() {
-	int setMode = server.arg("mode").toInt();
-	if(setMode == 1) useTestTimings = 1;
-	if(setMode == 0) useTestTimings = 0;
-	Serial.println("SetMode:" + String(setMode));
-    server.send(200, "text/html", "useTestTimings:" + String(useTestTimings));
-}
+	void handleSetMode() {
+		int setMode = server.arg("mode").toInt();
+		if(setMode == 1) useTestTimings = 1;
+		if(setMode == 0) useTestTimings = 0;
+		Serial.println("SetMode:" + String(setMode));
+		server.send(200, "text/html", "useTestTimings:" + String(useTestTimings));
+	}
 
 
-void setupStart() {
-}
+	void setupStart() {
+	}
 
-void extraHandlers() {
-	server.on("/getData", handleGetData);
-	server.on("/setMode", handleSetMode);
-}
+	void extraHandlers() {
+		server.on("/getData", handleGetData);
+		server.on("/setMode", handleSetMode);
+	}
+#endif
 
+#ifdef ESP8266
 void setupEnd() {
+#else
+	void setup() {
+#endif		
 	byte resp;
 	unsigned int t;
 	int LEDState = LOW;
@@ -450,6 +465,8 @@ void stateMachine() {
 
 void loop() {
 	stateMachine();
+#ifdef ESP8266
 	server.handleClient();
+#endif
 }
 	

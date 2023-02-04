@@ -1,5 +1,10 @@
-extern TickTwo SignalRefreshTimer;
-extern TickTwo displayflashtimer;
+#ifdef ESP8266
+	extern TickTwo SignalRefreshTimer;
+	extern TickTwo displayflashtimer;
+#else
+	extern Ticker SignalRefreshTimer;
+	extern Ticker displayflashtimer;
+#endif
 
 void PrintIDs() {
 	byte i;
