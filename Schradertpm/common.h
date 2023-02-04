@@ -72,7 +72,7 @@ void ResetSignalRefreshTimer() {
 }
 
 #ifdef ESP8266
-	void ICACHE_RAM_ATTR EdgeInterrupt() {
+	void IRAM_ATTR EdgeInterrupt() {
 #else
 	void EdgeInterrupt() {
 #endif			
