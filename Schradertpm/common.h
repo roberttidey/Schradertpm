@@ -71,7 +71,11 @@ void ResetSignalRefreshTimer() {
 	SignalRefreshTimer.start();
 }
 
-void EdgeInterrupt() {
+#ifdef ESP8266
+	void ICACHE_RAM_ATTR EdgeInterrupt() {
+#else
+	void EdgeInterrupt() {
+#endif			
 	unsigned long ts = micros();
 	unsigned long BitWidth;
 
