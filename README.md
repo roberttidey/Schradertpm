@@ -36,7 +36,7 @@ See this article for full details and background
   graphs.js.gz
 - The /edit operation is then supported to update further
 	
-##GPIO Allocation
+## GPIO Allocation
 - GPIO14 CC1101 SCLK SPI SCLK
 - GPIO13 CC1101 SI   SPI MOSI
 - GPIO12 CC1101 SO   SPI MISO
