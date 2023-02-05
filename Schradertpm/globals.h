@@ -104,11 +104,13 @@ int useTestTimings = 0;
 	const int MAXTIMINGS = 900;
 #elif ESP8266
 	#define PROC_TYPE "ESP8266"
-	const int RXPin = 0;   //must be an ext interrupt pin
+	const int I2CSCLPin = 0;
+	const int I2CSDAPin = 4;
+	const int RXPin = 5;   //must be an ext interrupt pin This is serial RX Pin
 	const int CDPin = 16;  //if wired, define 'USE_HW_CD' above, otherwise CD pin status is received over SPI
 	const int CC1101_CS = 15;  // Define the Chip Select pin
-	const int AUDIBLE_ALARM_PIN = 0;
-	const int DEBUGPIN = 1; 
+	const int AUDIBLE_ALARM_PIN = LED_BUILTIN;
+	const int DEBUGPIN = LED_BUILTIN; 
 	const int LED_RX = LED_BUILTIN;
 	const int MAXBITS = 1000;
 	const int MAXTIMINGS = 900;

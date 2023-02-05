@@ -258,7 +258,11 @@ void setupEnd() {
 			display.clearDisplay();
 			display.display();
 		#else
-			Wire.begin();
+			#ifdef I2CSDAPin
+				Wire.begin(I2CSDAPin, I2CSCLPin);
+			#else
+				Wire.begin();
+			#endif
 			Wire.setClock(400000L);
 			display.begin(&Adafruit128x64, I2C_ADDRESS);
 			display.setFont(Adafruit5x7);
