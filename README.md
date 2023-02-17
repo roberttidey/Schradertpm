@@ -43,6 +43,6 @@ See this article for full details and background
 - GPIO15 CC1101 CSN  SPI CS
 - GPIO04 SD1306 SDA
 - GPIO00 SD1306 SCL
-- GPIO06 CC1101 GD02 (RX)
+- GPIO05 CC1101 GD02 (RX)
 - GPIO02 Debug & Internal LED
 - GPIO16 CC1101 GD00 (CD)

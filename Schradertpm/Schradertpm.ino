@@ -258,7 +258,7 @@ void setupEnd() {
 			display.clearDisplay();
 			display.display();
 		#else
-			#ifdef I2CSDAPin
+			#ifdef ESP8266
 				Wire.begin(I2CSDAPin, I2CSCLPin);
 			#else
 				Wire.begin();
